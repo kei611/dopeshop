@@ -1,0 +1,119 @@
+
+{% extends 'base_body.html' %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <div class="marquee ticker upper">
+        <div class="track">
+            <div class="content"> SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM
+                "WAKABAYASHI" TOKYO ••• SHIPPING WORLDWIDE FROM "WAKABAYASHI" TOKYO •••</div>
+        </div>
+    </div>
+    <div class="marquee ticker middle">
+        <div class="track">
+            <div class="content"> THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG
+                FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK ••• THE BEST BANG FOR YOUR BUCK •••</div>
+        </div>
+    </div>
+    <div class="marquee ticker lower">
+        <div class="track">
+            <div class="content">SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION 
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION 
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION
+                DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• SHOP NOW ••• I WANT TO EARN A 10 BILLION DOLLARS ••• </div>
+        </div>
+    </div>
+</div>
+
+<div class="squinched-cooper-header">Shop</div>
+
+<div class="maingrid">
+    {% for product in products %}
+    <div class="grid-product">
+
+        <div class="grid-product-wrapper" id="image-transformer">
+            <a class="product-image" href="{{ product.get_url }}" id="product-image-img-img">
+                <img src="{{ product.images.url }}" id="product-image-img">
+            </a>
+        </div>
+
+        <div class="product-details">
+            <div class="product-title" id="protitle">
+                {{ product.product_name }}
+            </div>
+            <div class="product-description">
+                <span class="product-price">¥{{ product.price }}</span>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+{% include 'includes/footer.html' %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let elems = document.getElementsByClassName('grid-product-wrapper')
+        for (var i = 0; i < elems.length; i++) {
+            elems.item(i).addEventListener('mouseover', function () {
+                var rotation = Math.random() * (4 - (-4)) + (-4) 
+                var translation = Math.random() * (50 - (-50)) + (-50)
+                this.style.transform = "rotate3d(0, 0, 1, " + rotation + "deg) translate3d(0px, " + translation + "px, 0px) scale3d(1, 1, 1)"
+            }, false)
+
+            elems.item(i).addEventListener('mouseout', function () {
+                this.style.transform = "rotate3d(0, 0, 1, 0deg) translate3d(0px, 0px, 0px) scale3d(1, 1, 1)"
+            }, false)
+        }
+    }, false)
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let titles = document.getElementsByClassName('product-title')
+        for (var i = 0; i < titles.length; i++) {
+            var title = titles.item(i).textContent;
+            var parts = title.split(' ');
+            titles.item(i).textContent = "";
+            for (var j = 0; j < parts.length; j++) {
+                var word = parts[j];
+                if (word.length == 0) {
+                    continue;
+                }                
+                var rotation = Math.random() * (4 - (-4)) + (-4)
+                var translation = Math.random() * (4 - (-4)) + (-4)
+                titles.item(i).insertAdjacentHTML('beforeend', '<span class="wacky-font" style="transform: rotate(' + rotation + 'deg) translate(0, ' + translation + 'px)">' + word + '</span>&nbsp;')
+            }
+        }
+    }, false)
+</script>
+
+{% endblock %}

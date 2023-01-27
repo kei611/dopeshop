@@ -1,0 +1,53 @@
+{% extends 'base_body.html' %}
+{% load static %}
+
+{% block content %}
+
+<section id="location">
+    <div class="wrapper">
+        <div class="location-map">
+            <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1JMcFX8nZlqNEuWML-HV9ND-cIq5Y9v4&ehbc=2E312F" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="bar-info">
+            <div class="bar-info-section">
+                <div class="squinched-cooper-header">
+                    Bar Hours
+                </div>
+                <p>
+                    Mon CLOSED<br>
+                    Tue CLOSED<br>
+                    Wed CLOSED<br>
+                    Thu CLOSED<br>
+                    Fri CLOSED<br>
+                    Sat CLOSED<br>
+                    Sun CLOSED<br>
+                </p>
+            </div>
+            <div class="bar-info-section">
+                <div class="squinched-cooper-header">
+                    Contact
+                </div>
+                <div class="contact-info">
+                    <p>
+                        Instagram <br />
+                        <u><a href="https://www.instagram.com/iambigdata" target="_blank">@iambigdata
+                                <span>&#10153;</span></a></u><br />
+                    </p>
+                </div>
+            </div>
+            {% include 'includes/footer.html' %}
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let spacers = document.getElementsByClassName('top-spacer')
+        for (var i = 0; i < spacers.length; i++) {
+            spacers.item(i).style.height="0px";
+        }
+    }, false)
+</script>
+
+{% endblock %}
