@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store', 
     'carts', 
-    # 'admin_honeypot', 
+    'admin_honeypot', 
     'storages',
 ]
 
@@ -140,7 +140,7 @@ USE_TZ = True
 #     'dopeShop/static', 
 # ]
 
-# AWS S3 Static Files Configuration
+AWS S3 Static Files Configuration
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
