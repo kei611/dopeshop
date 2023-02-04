@@ -100,6 +100,8 @@ else:
     }
 
 
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -159,7 +161,7 @@ STATICFILES_DIRS = [
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-DEFAULT_FILE_STORAGE = 'dopeshop.media_storages.MediaStorage'
+DEFAULT_FILE_STORAGE = 'dopeShop.media_storages.MediaStorage'
 
 # media files configuration
 MEDIA_URL = '/media/'
