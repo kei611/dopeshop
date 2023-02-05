@@ -99,9 +99,6 @@ else:
         }
     }
 
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -119,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -180,5 +176,9 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 
 MY_URL = config('MY_URL')
+
+STRIPE_API_KEY = config('STRIPE_API_KEY')
+ALLOWED_COUNTRIES=["JP", "RU", "CA", "EE", "US", "NO", "SE", "FI", "IE", "GB", "FR", "KR", "TH", "NL", "NZ", "BE", "IT", "CZ", "DE", "HU", "GE"]
+STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET')
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None

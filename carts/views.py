@@ -122,10 +122,8 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
 
 import stripe
-STRIPE_API_KEY = 'sk_test_51KpPxCBpT7ryj6PXw9gqGEVujrgWlv7tNnw8eHSvbXeDN4Psj359XLSt7c77o33T3wX4E4s09QpycS1Kt7Tm1G7U001VAlmwL3'
-ALLOWED_COUNTRIES = ["JP", "RU", "CA", "EE", "US", "NO", "SE", "FI", "IE", "GB", "FR", "KR", "TH", "NL", "NZ", "BE", "IT", "CZ", "DE", "HU", "GE"]
 def checkout(request, total=0, quantity=0, cart_items=None):
-    stripe.api_key = STRIPE_API_KEY
+    stripe.api_key = settings.STRIPE_API_KEY
     
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
@@ -146,7 +144,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
 
     try:
         checkout_session = stripe.checkout.Session.create(
-            shipping_address_collection={"allowed_countries": ALLOWED_COUNTRIES},
+            shipping_address_collection={"allowed_countries": settings.ALLOWED_COUNTRIES},
             payment_method_types=['card'],
             line_items=line_items,
             shipping_options=create_shipping(),
@@ -167,22 +165,16 @@ def create_shipping():
 
 def create_line_item(unit_amount, name, quantity, stripe_price_id):
     return {
-        # 'price_data': {
-        #     'currency': 'JPY',
-        #     'unit_amount': unit_amount,
-        #     'product_data': {'name': name, }
-        # },
         'price': stripe_price_id, 
         'quantity': quantity,
     }
     
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-STRIPE_WEBHOOK_SECRET = "whsec_a88282272a5207986d9cfd2515d32f1994b8011188e716d578a55fe6a47d9968"
 @csrf_exempt
 def my_webhook_view(request):
-    stripe.api_key = STRIPE_API_KEY
-    endpoint_secret = STRIPE_WEBHOOK_SECRET
+    stripe.api_key = settings.STRIPE_API_KEY
+    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
