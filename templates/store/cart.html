@@ -43,7 +43,7 @@
 
                 <div class="input-group input-spinner">
                     <div class="input-group-prepend">
-                        <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="change-quantity" type="button" id="button-plus">+</a>
+                        <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="change-quantity" type="button" id="button-plus">-</a>
                     </div>
                     <input type="type" class="cart-pill" id="item-quantity" value="{{ cart_item.quantity }}">
                     <div class="input-group-append">
@@ -52,7 +52,7 @@
                             {% for item in cart_item.variations.all %}
                             <input type="hidden" name="{{ item.variation_category | lower }}" value="{{ item.variation_value | capfirst }}">
                             {% endfor %}
-                            <button class="change-quantity" type="submit" id="button-minus">-</button>
+                            <button class="change-quantity" type="submit" id="button-minus">+</button>
                         </form>
                     </div>
                 </div>
@@ -81,8 +81,8 @@
             <span class="squinched-cooper-header">Subtotal: ¥{{ total }}</span>
         </div>
 
-        <a href="{% url 'checkout' %}" class="action-button">Checkout</a>
         <a href="{% url 'store' %}" class="action-button">Continue Shopping</a>
+        <a href="{% url 'checkout' %}" class="action-button">Checkout</a>
     </div>
     {% endif %}
 </div>
