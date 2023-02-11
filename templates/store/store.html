@@ -62,6 +62,9 @@
             <a class="product-image" href="{{ product.get_url }}" id="product-image-img-img">
                 <img src="{{ product.images.url }}" id="product-image-img">
             </a>
+            {% if product.stock <= 0 %}
+            <img class="sold-out" src="{% static 'images/sold_out_image.svg' %}">
+            {% endif %}
         </div>
 
         <div class="product-details">
