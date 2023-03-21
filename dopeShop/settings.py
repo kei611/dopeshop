@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool) 
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['dopeshop-env.eba-rwrbf59h.us-west-2.elasticbeanstalk.com', '*']
 
@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'store', 
-    'carts', 
-    'admin_honeypot', 
+    'store',
+    'carts',
+    'admin_honeypot',
     'storages',
 ]
 
@@ -68,7 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'carts.context_processors.counter', 
+                'carts.context_processors.counter',
             ],
         },
     },
@@ -83,19 +83,19 @@ WSGI_APPLICATION = 'dopeShop.wsgi.application'
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql', 
-            'NAME': os.environ['RDS_DB_NAME'], 
-            'USER': os.environ['RDS_USERNAME'], 
-            'PASSWORD': os.environ['RDS_PASSWORD'], 
-            'HOST': os.environ['RDS_HOSTNAME'], 
-            'PORT': os.environ['RDS_PORT'], 
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
         }
     }
-else: 
+else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3', 
-            'NAME': BASE_DIR / 'db.sqlite3', 
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
@@ -135,7 +135,7 @@ USE_TZ = True
 # STATIC_URL = 'static/'
 # STATIC_ROOT = BASE_DIR /'static'
 # STATICFILES_DIRS = [
-#     'dopeShop/static', 
+#     'dopeShop/static',
 # ]
 
 # AWS S3 Static Files Configuration
