@@ -218,11 +218,12 @@ body {
 .sold-out {
     position: relative;
     /* position: absolute; */
-    top: -448px;
+    /* top: -300px; */
+    bottom: 300px;
     right: -170px;
     display: inline-block;
-    /* width: 54%; */
-    /* height: 32%; */
+    width: 54%;
+    height: 32%;
     object-fit: contain;
 }
 
