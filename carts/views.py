@@ -23,7 +23,7 @@ def add_cart(request, product_id):
         for item in request.POST:
             key = item
             value = request.POST[key]
-            
+
             try:
                 variation = Variation.objects.get(product=product, variation_category__iexact=key, variation_value__iexact=value)
                 product_variation.append(variation)
@@ -37,7 +37,7 @@ def add_cart(request, product_id):
             cart_id=_cart_id(request)
         )
     cart.save()
-    
+
     is_cart_item_exists = CartItem.objects.filter(product=product, cart=cart).exists()
     if is_cart_item_exists:
         cart_item = CartItem.objects.filter(product=product, cart=cart)
@@ -50,7 +50,7 @@ def add_cart(request, product_id):
             existing_variation = item.variations.all()
             ex_var_list.append(list(existing_variation))
             id.append(item.id)
-            
+
         if product_variation in ex_var_list:
             # increase the cart item quantity
             index = ex_var_list.index(product_variation)
@@ -66,9 +66,9 @@ def add_cart(request, product_id):
             item.save()
     else:
         cart_item = CartItem.objects.create(
-            product = product, 
-            quantity = 1, 
-            cart = cart, 
+            product = product,
+            quantity = 1,
+            cart = cart,
         )
         if len(product_variation) > 0:
             cart_item.variations.clear()
@@ -109,14 +109,14 @@ def cart(request, total=0, quantity=0, cart_items=None):
         tax = (2 * total)/100
         grand_total = total + tax
     except ObjectDoesNotExist:
-        pass 
+        pass
 
     context = {
-        'total': total, 
-        'quantity': quantity, 
-        'cart_items': cart_items, 
-        'tax': tax, 
-        'grand_total': grand_total, 
+        'total': total,
+        'quantity': quantity,
+        'cart_items': cart_items,
+        'tax': tax,
+        'grand_total': grand_total,
     }
     return render(request, 'store/cart.html', context)
 
@@ -124,7 +124,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
 import stripe
 def checkout(request, total=0, quantity=0, cart_items=None):
     stripe.api_key = settings.STRIPE_API_KEY
-    
+
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)
@@ -140,7 +140,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
             line_items.append(line_item)
 
     except ObjectDoesNotExist:
-        pass 
+        pass
 
     try:
         checkout_session = stripe.checkout.Session.create(
@@ -149,13 +149,13 @@ def checkout(request, total=0, quantity=0, cart_items=None):
             line_items=line_items,
             shipping_options=create_shipping(),
             mode='payment',
-            success_url=f'{settings.MY_URL}/cart/success/', 
-            cancel_url=f'{settings.MY_URL}/cart/cancel/', 
+            success_url=f'{settings.MY_URL}/cart/success/',
+            cancel_url=f'{settings.MY_URL}/cart/cancel/',
         )
         return redirect(checkout_session.url, code=303)
     except Exception as e:
         return HttpResponse(status=400)
-        
+
 def create_shipping():
     shipping_items = []
     shipping_items.append({"shipping_rate": "shr_1MSkBDBpT7ryj6PXh6G8JE1p"})
@@ -165,10 +165,10 @@ def create_shipping():
 
 def create_line_item(unit_amount, name, quantity, stripe_price_id):
     return {
-        'price': stripe_price_id, 
+        'price': stripe_price_id,
         'quantity': quantity,
     }
-    
+
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 @csrf_exempt
@@ -196,7 +196,7 @@ def my_webhook_view(request):
         create_payments(session)
 
     return HttpResponse(status=200)
-    
+
 def create_order(session):
     order = Order()
     order.full_name = session['customer_details']['name']
@@ -209,7 +209,7 @@ def create_order(session):
     order.city = session['customer_details']['address']['city']
     order.order_total = session['amount_total']
     order.save()
-    
+
     # Generate order number
     yr = int(datetime.date.today().strftime('%Y'))
     dt = int(datetime.date.today().strftime('%d'))
@@ -219,17 +219,17 @@ def create_order(session):
     order_number = current_date + str(order.id)
     order.order_number = order_number
     order.save()
-    
+
     print("Creating order")
-        
+
 def create_payments(session):
     # Store transaction details inside Payment model
     payment = Payment()
     payment.payment_id = session['id']
     payment.payment_method = session['payment_method_types']
     payment.amount_paid = session['amount_total']
-    payment.status = session['payment_status'] 
-    
+    payment.status = session['payment_status']
+
     payment.save()
 
 def create_orderProduct_clear_cart(request):
@@ -241,10 +241,10 @@ def create_orderProduct_clear_cart(request):
         product = Product.objects.get(id=item.product_id)
         product.stock -= item.quantity
         product.save()
-    
+
     # Clear cart
-    CartItem.objects.filter(cart=cart, is_active=True).delete()         
-    
+    CartItem.objects.filter(cart=cart, is_active=True).delete()
+
 def success(request):
     create_orderProduct_clear_cart(request)
     return render(request, 'orders/success.html')

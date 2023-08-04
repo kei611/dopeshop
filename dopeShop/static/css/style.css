@@ -165,7 +165,7 @@ body {
     padding: 0 4%;
 }
 
-/* .sold-out {
+.sold-out {
     position: absolute;
     top: 18px;
     right: 0;
@@ -173,14 +173,15 @@ body {
     width: 54%;
     height: 32%;
     object-fit: contain;
-} */
+}
 
 .grid-product-wrapper {
     display: block;
     transition: .2s;
+    position: relative;
 }
 
-.product-image img {
+.product-image img{
     top: 0px;
     left: 0px;
     margin-right: 10px;
@@ -213,18 +214,6 @@ body {
 .product-image-wrapper {
     transition: .2s;
     transition-property: transform;
-}
-
-.sold-out {
-    position: relative;
-    /* position: absolute; */
-    /* top: -300px; */
-    bottom: 200px;
-    right: -170px;
-    display: inline-block;
-    width: 54%;
-    height: 32%;
-    object-fit: contain;
 }
 
 /* ====================== Contact Page ==================== */
