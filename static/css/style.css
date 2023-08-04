@@ -178,9 +178,10 @@ body {
 .grid-product-wrapper {
     display: block;
     transition: .2s;
+    position: relative;
 }
 
-.product-image img {
+.product-image img{
     top: 0px;
     left: 0px;
     margin-right: 10px;
