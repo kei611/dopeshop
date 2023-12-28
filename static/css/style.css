@@ -134,6 +134,13 @@ body {
     animation-direction: alternate-reverse;
 }
 
+.footer p.links {
+    font-family: ArialNarrow;
+    font-weight: 900;
+    color: rgb(0, 0, 0);
+    word-spacing: 20px;
+}
+
 /* ----------------------------- headline ----------------------------- */
 .squinched-cooper-header {
     /* font-family: 'Rubik Puddles', cursive; */
