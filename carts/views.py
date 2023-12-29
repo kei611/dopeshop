@@ -150,7 +150,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
             shipping_options=create_shipping(),
             mode='payment',
             success_url=f'{settings.MY_URL}/cart/success/',
-            cancel_url=f'{settings.MY_URL}/cart/cancel/',
+            cancel_url=f'{settings.MY_URL}/cart/',
         )
         return redirect(checkout_session.url, code=303)
     except Exception as e:
@@ -248,5 +248,5 @@ def success(request):
     create_orderProduct_clear_cart(request)
     return render(request, 'orders/success.html')
 
-def cancel(request):
-    return render(request, 'orders/cancel.html')
+# def cancel(request):
+#     return render(request, 'orders/cancel.html')
