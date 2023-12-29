@@ -158,8 +158,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
 
 def create_shipping():
     shipping_items = []
-    shipping_items.append({"shipping_rate": "shr_1MSkBDBpT7ryj6PXh6G8JE1p"})
-    # shipping_items.append({"shipping_rate": "shr_1MSkqcBpT7ryj6PX8uB7jnjM"})
+    shipping_items.append({"shipping_rate": settings.SHIPPING_RATE})
     return shipping_items
 
 
